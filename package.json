@@ -1,0 +1,15 @@
+{
+  "name": "eslint-with-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:error": "tsc -p ./tsconfig.error.json",
+    "build:noerror": "tsc -p ./tsconfig.noerror.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^3.8.2"
+  }
+}
