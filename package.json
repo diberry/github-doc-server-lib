@@ -1,15 +1,25 @@
 {
-  "name": "eslint-with-typescript",
-  "version": "1.0.0",
+  "name": "github-doc-server-lib",
+  "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build:error": "tsc -p ./tsconfig.error.json",
-    "build:noerror": "tsc -p ./tsconfig.noerror.json"
+    "build:noerror": "tsc -p ./tsconfig.noerror.json",
+    "lint:error": "eslint ./src/*.ts --debug"
   },
-  "author": "",
+  "author": "diberry",
   "license": "ISC",
   "dependencies": {
+    "@octokit/graphql": "^4.3.1",
+    "@octokit/rest": "^17.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "applicationinsights": "^1.7.4",
+    "axios": "^0.19.2",
+    "eslint": "^6.8.0",
+    "jest": "^25.3.0",
+    "js-base64": "^2.5.2",
     "typescript": "^3.8.2"
   }
 }

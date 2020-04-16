@@ -1,15 +1,3 @@
-// testing for any
-
-export class EsLintTest {
-    credentials: any;
-
-    myparam;
-
-    constructor(credentials: any) {
-      this.credentials = credentials;
-
-    }
-    thisTest(): any {
-      return 2+2;
-    }
-  }
+export * from './github';
+export * from './http';
+export * from './log';
