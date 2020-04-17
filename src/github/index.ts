@@ -1,4 +1,4 @@
-export * from './file';
-export * from './authentication';
-export * from './repo';
-export * from './user';
+export * as File from './file';
+export * as Authentication from './authentication';
+export * as Repo from './repo';
+export * as User from './user';

@@ -19,18 +19,7 @@
                 "<node_internals>/**"
             ]
         },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\index.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
-        },
+
         {
             "type": "node",
             "request": "launch",
