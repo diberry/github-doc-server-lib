@@ -1,15 +1,30 @@
-import { getAuthenticatedHttp } from '../http';
+import { getOctokit } from './octokit'
 
-export async function getProfile (token) {
+/*
+Get profile
+*/
+export async function getProfile(token, username, timeout?: number): Promise<any> {
 
-    if(!token) return;
+  if (!token || !username) return;
 
-    const request = getAuthenticatedHttp(token);
+  const octokit = getOctokit(token, timeout)
 
-    const userProfileResponse = await request({
-        method: 'get',
-        url: '/user'
-      });
 
-      return userProfileResponse.data;
+  return await octokit.users.getByUsername({
+    username
+  });
+
+}
+
+/*
+Get profile of authenticated user (token)
+*/
+export async function getPrivateProfile(token, timeout?: number): Promise<any> {
+
+  if (!token) return;
+
+  const octokit = getOctokit(token, timeout)
+
+  return await octokit.users.getAuthenticated();
+
 }

@@ -1,15 +1,12 @@
-import { getAuthenticatedHttp } from '../http';
-import Octokit from "@octokit/rest";
 import { Base64 } from 'js-base64';
+import { getOctokit } from './octokit'
 
-
-const readme = async (token, user, repoInfo) => {
+/*
+export const readme = async (token, user, repoInfo, timeout = DEFAULT_TIMEOUT) => {
 
   if (!token || !user || !repoInfo || !repoInfo.owner || !repoInfo.repo || !repoInfo.path) return;
 
-  const octokit = new Octokit.Octokit({
-    auth: token
-  });
+  const octokit = getOctoKit(token,timeout)
 
   const config = {
     owner: repoInfo.owner,
@@ -21,13 +18,11 @@ const readme = async (token, user, repoInfo) => {
   return (contents && contents.data) ? contents.data : null;
 }
 
-const readFile = async (token, user, repoInfo) => {
+export const readFile = async (token, user, repoInfo, timeout = DEFAULT_TIMEOUT) => {
 
   if (!token || !user || !repoInfo || !repoInfo.owner || !repoInfo.repo || !repoInfo.path) return;
 
-  const octokit = new Octokit.Octokit({
-    auth: token
-  });
+  const octokit = getOctoKit(token,timeout)
 
   const config = {
     owner: repoInfo.owner,
@@ -39,36 +34,25 @@ const readFile = async (token, user, repoInfo) => {
   return (contents && contents.data) ? contents.data : null;
 
 }
+*/
 
-const writeFile = async (token,  repoInfo, fileInfo) => {
+export const writeFile = async (token: string, repo: any, fileInfo: any, timeout?: number): Promise<any> => {
 
-    const request = getAuthenticatedHttp(token)
+    const octokit = getOctokit(token, timeout)
 
-    const base64Content = Base64.encode(fileInfo.content);
+    const base64Content = Base64.encode(fileInfo?.content.trim());
 
-    const uri = `repos/${repoInfo.owner}/${repoInfo.repo}/contents/${repoInfo.path}`;
+    const newFile:any = {
+      owner: repo?.owner ?? "",
+      repo: repo?.name ?? "",
+      path: repo?.path ?? "",
+      message: fileInfo?.commitmessage ?? "",
+      content: base64Content,
+      committer: {
+        name: fileInfo?.committername ?? "",
+        email: fileInfo?.committeremail ?? ""
+      }
+    };
 
-    const data = {
-      "message": "commmit message " + fileInfo.commitMessage,
-      "committer": {
-        "name": fileInfo.committerName,
-        "email": fileInfo.committerEmail
-      },
-      "content": base64Content
-    }
-
-    const contents = await request({
-      method: 'PUT',
-      url: uri,
-      data
-    });
-
-    return (contents && contents.data) ? contents.data : null;
-
+    return await octokit.repos.createOrUpdateFile(newFile)
 }
-
-module.exports = {
-  writeFile,
-  readFile,
-  readme
-};

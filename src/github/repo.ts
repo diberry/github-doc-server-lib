@@ -1,15 +1,18 @@
-import { getAuthenticatedHttp } from '../http';
+import { getOctokit } from './octokit'
 
-export async function getRepoListByUserRole (token,user,role) {
 
-    if(!token || !user || !role) return;
+/*
+Type: all, owner, member
+*/
+export async function getRepoListByUserRole(token: string, username: string, type?, timeout?: number):Promise<any> {
 
-    const request = getAuthenticatedHttp(token);
+  if (!token || !username || !type) return;
 
-    const response = await request({
-        method: 'GET',
-        url: `/users/${user}/repos?type=${role}`
-      });
+  const octokit = getOctokit(token, timeout)
 
-  return response.data;
+  return await octokit.repos.listForUser({
+    username, type
+  });
+
+
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getTimeout } from './timeout'
 
 export function getAuthenticatedHttp (token: string) {
 
@@ -6,7 +7,7 @@ export function getAuthenticatedHttp (token: string) {
 
     let config = {
       baseURL: 'https://api.github.com/',
-      timeout: 1000,
+      timeout: getTimeout(),
       headers: {
         'Authorization': 'token ' + token,
         'Accept': '*/*',

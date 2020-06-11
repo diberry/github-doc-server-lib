@@ -1,0 +1,12 @@
+# 1.0.0 - signature changes to methods
+
+* Add timeout with 1 minute default
+* berry.dina_at_gmail = test account and test token
+* test repo names
+    * dfberry1/test-public
+    * dfberry1/test-private
+* use http for initial call
+* use octokit for all other calls
+* move tests into separate folder
+* move .env reading to index
+* add coverage to test
