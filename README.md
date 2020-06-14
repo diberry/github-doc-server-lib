@@ -1,1 +1,1 @@
-# 20200419 Authenticated Session full flow
+# Oauth GitHub library
